@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/test")
-public class TestController extends BaseController{
-
+@RequestMapping("/centralTrend")
+public class CentralTrendController extends BaseController{
 
     @GetMapping
-    public ModelAndView test(Model model){
-        return super.view("test");
+    public ModelAndView mainPage(Model model){
+        return super.view("centralTrend");
     }
+
 }
