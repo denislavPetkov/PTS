@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/distractionMeasures")
-public class DistractionMeasuresController extends BaseController{
+@RequestMapping("/dispersionMeasures")
+public class DispersionMeasuresController extends BaseController{
 
     @GetMapping
     public ModelAndView mainPage(Model model){
-        return super.view("distractionMeasures");
+        return super.view("dispersionMeasures");
     }
 
 }
