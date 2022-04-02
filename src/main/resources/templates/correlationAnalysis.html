@@ -1,10 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Correlation Analysis</title>
 </head>
 <body>
+<div align="center" class="container my-2">
+    <h1>Correlation Analysis data</h1>
+<!--    <input type="text" th:value="${correlationCoefficient}" readonly>-->
+    <b><section class="post-content"/>
+        <h2>
+            Correlation Coefficient: [(${correlationCoefficient})]
+        </h2>
+    </b>
+</div>
+<div align="center" class="container my-2">
+    <table border = "1" class="table table-hover">
+        <thead class="thread-dark">
+        <tr>
+            <th>Student ID</th>
+            <th>Student Result</th>
+            <th>Number of files uploaded</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student : ${studentList}" style="cursor: pointer" >
+            <td th:text="${student.id}"></td>
+            <td th:text="${student.result}"></td>
+            <td th:text="${student.uploadedFiles}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 </body>
 </html>
