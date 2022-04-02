@@ -12,28 +12,39 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 @RequestMapping("/correlationAnalysis")
 public class CorrelationAnalysisController extends BaseController{
 
-    private String studentsPath1 = "Course_A_StudentsResults_Year_1.xlsx";
-    private String studentsPath2 = "Course_A_StudentsResults_Year_2.xlsx";
-    private String studentActivitiesPath = "Logs_Course_A_StudentsActivities.xlsx";
+    private String year1StudentsFilePath = "Course_A_StudentsResults_Year_1.xlsx";
+    private String year2StudentsFilePath = "Course_A_StudentsResults_Year_2.xlsx";
+    private String studentActivitiesFilePath = "Logs_Course_A_StudentsActivities.xlsx";
 
     @Autowired
     DataHandler dataHandler;
 
     @GetMapping
     public ModelAndView mainPage(Model model) throws  FileNotFoundException {
-        List<Student> students = dataHandler.GetStudents(studentsPath1);
-//        students.addAll(dataHandler.GetStudents(studentsPath2));
+        List<Student> studentsYear1 = dataHandler.GetStudents(year1StudentsFilePath);
+        List<Student> studentsYear2 = dataHandler.GetStudents(year2StudentsFilePath);
+        List<Student> studentsBothYears = new ArrayList<>();
+        studentsBothYears.addAll(studentsYear1);
+        studentsBothYears.addAll(studentsYear2);
 
-        List <StudentActivities> studentActivities = dataHandler.GetStudentActivities(studentActivitiesPath);
+        List <StudentActivities> studentActivities = dataHandler.GetStudentActivities(studentActivitiesFilePath);
 
-        model.addAttribute("studentList" , dataHandler.SetUploadedFiles(students, studentActivities));
-        model.addAttribute("correlationCoefficient", dataHandler.GetPearsonsCorrelation(students));
+        model.addAttribute("studentListYear1" , dataHandler.SetUploadedFiles(studentsYear1, studentActivities));
+        model.addAttribute("correlationCoefficientYear1", dataHandler.GetPearsonsCorrelation(studentsYear1));
+
+        model.addAttribute("studentListYear2" , dataHandler.SetUploadedFiles(studentsYear2, studentActivities));
+        model.addAttribute("correlationCoefficientYear2", dataHandler.GetPearsonsCorrelation(studentsYear2));
+
+        model.addAttribute("studentListBothYears" , dataHandler.SetUploadedFiles(studentsBothYears, studentActivities));
+        model.addAttribute("correlationCoefficientBothYears", dataHandler.GetPearsonsCorrelation(studentsBothYears));
+
         return super.view("correlationAnalysis");
     }
 
