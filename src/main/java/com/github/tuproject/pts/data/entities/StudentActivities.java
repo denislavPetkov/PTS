@@ -4,6 +4,15 @@ import com.poiji.annotation.ExcelCellName;
 
 public class StudentActivities {
 
+    @ExcelCellName("Event context")
+    private String eventContext;
+    @ExcelCellName("Component")
+    private String component;
+    @ExcelCellName("Event name")
+    private String eventName;
+    @ExcelCellName("Description")
+    private String description;
+
     public String getEventContext() {
         return eventContext;
     }
@@ -35,15 +44,6 @@ public class StudentActivities {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    @ExcelCellName("Event context")
-    private String eventContext;
-    @ExcelCellName("Component")
-    private String component;
-    @ExcelCellName("Event name")
-    private String eventName;
-    @ExcelCellName("Description")
-    private String description;
 
 
 }
